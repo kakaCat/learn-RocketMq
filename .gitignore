@@ -1,0 +1,44 @@
+# maven ignore
+*target/
+!tools/*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+
+# eclipse ignore
+*.settings/
+.project
+.classpath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+*.checkstyle
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+sublime-project
+sublime-project.sublime-workspace
+
+coverage-report/
+/bin/
+
+*catalina.home_IS_UNDEFINED/
+
+*MBGTestProject/
+
+*/git.log
+/front-common/src/main/java/com/dsjstudio/front/common/core/aspect/ControllerAspect.java
+/.metadata/
