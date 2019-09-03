@@ -6,6 +6,9 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 public class AsyncProducer {
 
     public static void main(String[] args) throws Exception {
@@ -16,11 +19,13 @@ public class AsyncProducer {
         //Launch the instance.
         producer.start();
         producer.setRetryTimesWhenSendAsyncFailed(0);
+        int messageCount = 100;
+        final CountDownLatch countDownLatch = new CountDownLatch(messageCount);
         for (int i = 0; i < 100; i++) {
             final int index = i;
             //Create a message instance, specifying topic, tag and message body.
             Message msg = new Message("TopicTest",
-                    "TagA",
+                    "TagB",
                     "OrderID188",
                     "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
             producer.send(msg, new SendCallback() {
@@ -37,6 +42,7 @@ public class AsyncProducer {
             });
         }
         //Shut down once the producer instance is not longer in use.
+        countDownLatch.await(5, TimeUnit.SECONDS);
         producer.shutdown();
     }
 
